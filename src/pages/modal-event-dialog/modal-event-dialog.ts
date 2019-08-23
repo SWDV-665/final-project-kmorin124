@@ -39,12 +39,14 @@ export class ModalEventDialogPage {
     this.worker = this.data.worker
   }
 
+  // Load people and venues on page load
   ionViewDidLoad() {
     console.log('ionViewDidLoad VenuesPage');
     this.loadVenues();
     this.loadPeople();
   }
 
+  // Api call returnes venues and adds to venues list
   loadVenues() {
     return this.apiHandler.getVenues()
     .subscribe(
@@ -52,11 +54,8 @@ export class ModalEventDialogPage {
       error => this.errorMessage = <any>error);
   }
 
-  testLog(id, name, date, venue, workers) {
-    console.log(id, name, date, venue, workers)
-  }
 
-
+  // Api call returns people and adds to peoople list
   loadPeople() {
     return this.apiHandler.getPeople()
     .subscribe(
@@ -64,6 +63,7 @@ export class ModalEventDialogPage {
       error => this.errorMessage = <any>error);
   }
 
+  // Api call returns the worker of an event by event id
   loadEventWorkers(id) {
     return this.apiHandler.getEventWorkers(this.data._id)
     .subscribe(
@@ -71,11 +71,13 @@ export class ModalEventDialogPage {
       error => this.errorMessage = <any>error);
   }
 
+  // Closes current view
   closeModal() {
     console.log('Closing modal')
     this.view.dismiss()
   }
 
+  // Creates a new event
   addEvent(name, date, venue) {
     const event = {
       name: name,
@@ -88,6 +90,7 @@ export class ModalEventDialogPage {
     this.closeModal()
   }
 
+  // Edits and existing event
   editEvent(id, name, date, venue, worker) {
     const event = {
       _id: id,
