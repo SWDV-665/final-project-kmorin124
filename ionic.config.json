@@ -1,5 +1,7 @@
 {
   "name": "event-planner",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }

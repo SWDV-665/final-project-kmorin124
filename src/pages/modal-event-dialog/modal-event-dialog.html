@@ -1,0 +1,78 @@
+<!--
+  Generated template for the ModalEventDialogPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{data.title}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <!-- 
+    Modal is used for both adding and editing events
+    The title passed with the data decides which html gets loaded when the modal is opened.
+  -->
+
+
+  <!-- Add event -->
+  <div *ngIf="data.title === 'Add Event...'">
+    <ion-label position="floating">Event Name</ion-label>
+    <ion-input placeholder="Event Name" [(ngModel)]="name"></ion-input>
+    <ion-label position="floating">Date</ion-label>
+    <ion-item>
+      <ion-label>D MMM YYYY H:mm</ion-label>
+      <ion-datetime displayFormat="D MMM YYYY H:mm" min="2019" max="2025" [(ngModel)]="date"></ion-datetime>
+    </ion-item>
+    <ion-label position="floating">Venue</ion-label>
+    <ion-list>
+      <ion-item>
+        <ion-label>Venue</ion-label>
+        <ion-select [(ngModel)]="venue">
+          <ion-option *ngFor="let venue of venues">{{venue.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-buttons end>
+      <button ion-button (click)="addEvent(name, date, venue)">Save</button>
+    </ion-buttons>
+  </div>
+
+  <!-- Edit event -->
+  <div *ngIf="data.title === 'Edit Event...'">
+    <ion-label position="floating">Event Name</ion-label>
+    <ion-input [(ngModel)]="name" placeholder={{data.name}}></ion-input>
+    <ion-label position="floating">Date</ion-label>
+    <ion-item>
+      <ion-label>D MMM YYYY H:mm</ion-label>
+      <ion-datetime displayFormat="D MMM YYYY H:mm" min="2019" max="2025" minuteValues="0,15,30,45" [(ngModel)]="date"></ion-datetime>
+    </ion-item>
+    <ion-label position="floating">Venue</ion-label>
+    <ion-list>
+      <ion-item>
+        <ion-label>Venue</ion-label>
+        <ion-select [(ngModel)]="venue" value="venue">
+          <ion-option *ngFor="let loc of venues">{{loc.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-label>Worker</ion-label>
+        <ion-select [(ngModel)]="worker" value="worker">
+          <ion-option *ngFor="let worker of people">{{worker.lastName}}, {{worker.firstName}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-buttons end>
+      <button ion-button (click)="editEvent(data._id, name, date, venue, worker)">Save</button>
+    </ion-buttons>
+  </div>
+
+</ion-content>
